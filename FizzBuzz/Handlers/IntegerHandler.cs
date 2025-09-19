@@ -38,14 +38,8 @@ namespace FizzBuzz.Handlers
             Console.WriteLine(stringBuilder.ToString());
         }
 
-        private bool DivisibleByFive(int currentInt)
-        {
-            throw new NotImplementedException();
-        }
+        private bool DivisibleByFive(int currentInt) => currentInt % 5 == 0;
 
-        private bool DivisibleByThree(int currentInt)
-        {
-            throw new NotImplementedException();
-        }
+        private bool DivisibleByThree(int currentInt) => currentInt % 3 == 0;
     }
 }
