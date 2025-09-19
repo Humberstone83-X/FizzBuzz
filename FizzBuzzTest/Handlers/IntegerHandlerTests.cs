@@ -1,0 +1,63 @@
+﻿using FizzBuzz.Handlers;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Xunit;
+
+namespace FizzBuzzTest.Handlers
+{
+    public class IntegerHandlerTests
+    {
+        private readonly IntegerHandler _handler;
+        private readonly TextWriter _out;
+        private readonly StringWriter _consoleWriter;
+
+        public IntegerHandlerTests()
+        {
+            _handler = new IntegerHandler();
+
+            //Mock Console
+            _out = Console.Out;
+            _consoleWriter = new StringWriter();
+            Console.SetOut(_consoleWriter);
+        }
+
+        private static List<int> ArrangeInputRange(int startInclusive, int endInclusive) 
+            => Enumerable.Range(startInclusive, endInclusive).ToList();
+
+        private void AssertLinesEqual(IEnumerable<string> expected)
+        {
+            var expectedList = expected.ToList();
+            var actual = GetLines().ToList();
+
+            Assert.Equal(expectedList.Count, actual.Count);
+
+            for (int i = 0; i < expectedList.Count; i++)
+            {
+                Assert.Equal(expectedList[i], actual[i]);
+            }
+        }
+
+        private string[] GetLines()
+        {
+            Console.Out.Flush();
+            var all = _consoleWriter.ToString();
+            return all.Replace("\r\n", "\n")
+                      .Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        [Fact]
+        public void Handle_PrintsNumberWhenNotFizzOrBuzz()
+        {
+            var input = ArrangeInputRange(1, 1);
+
+            var output = new List<string>();
+            output.Add("1");
+
+            _handler.Handle(input);
+
+            AssertLinesEqual(output);
+        }
+    }
+}
