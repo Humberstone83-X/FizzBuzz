@@ -52,12 +52,19 @@ namespace FizzBuzzTest.Handlers
         {
             var input = ArrangeInputRange(1, 1);
 
-            var output = new List<string>();
-            output.Add("1");
+            _handler.Handle(input);
+
+            AssertLinesEqual(new[] { "1" });
+        }
+
+        [Fact]
+        public void Handle_PrintsFizzForMultiplesOf3()
+        {
+            var input = new List<int> { 3, 6, 9 };
 
             _handler.Handle(input);
 
-            AssertLinesEqual(output);
+            AssertLinesEqual(new[] { "Fizz", "Fizz", "Fizz" });
         }
     }
 }
