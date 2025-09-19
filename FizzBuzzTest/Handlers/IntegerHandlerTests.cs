@@ -77,5 +77,16 @@ namespace FizzBuzzTest.Handlers
 
             AssertLinesEqual(new[] { "Buzz", "Buzz", "Buzz" });
         }
+
+
+        [Fact]
+        public void Handle_PrintsFizzBuzzForMultiplesOf3And5()
+        {
+            var input = new List<int> { 15, 30, 45 };
+
+            _handler.Handle(input);
+
+            AssertLinesEqual(new[] { "FizzBuzz", "FizzBuzz", "FizzBuzz" });
+        }
     }
 }
