@@ -66,5 +66,16 @@ namespace FizzBuzzTest.Handlers
 
             AssertLinesEqual(new[] { "Fizz", "Fizz", "Fizz" });
         }
+
+
+        [Fact]
+        public void Handle_PrintsBuzzForMultiplesOf5()
+        {
+            var input = new List<int> { 5, 10, 20 };
+
+            _handler.Handle(input);
+
+            AssertLinesEqual(new[] { "Buzz", "Buzz", "Buzz" });
+        }
     }
 }
