@@ -6,7 +6,6 @@ namespace FizzBuzz.Handlers
 {
     public class IntegerHandler : IFizzBuzzHandler
     {
-
         public void Handle(List<int> intsToHandle)
         {
             foreach (int currentInt in intsToHandle)
