@@ -7,7 +7,7 @@ using Xunit;
 
 namespace FizzBuzzTest.Handlers
 {
-    public class IntegerHandlerTests
+    public class IntegerHandlerTests : IDisposable
     {
         private readonly IntegerHandler _handler;
         private readonly TextWriter _out;
@@ -21,6 +21,12 @@ namespace FizzBuzzTest.Handlers
             _out = Console.Out;
             _consoleWriter = new StringWriter();
             Console.SetOut(_consoleWriter);
+        }
+
+        public void Dispose()
+        {
+            Console.SetOut(_out);
+            _consoleWriter.Dispose();
         }
 
         private static List<int> ArrangeInputRange(int startInclusive, int endInclusive) 
@@ -87,6 +93,22 @@ namespace FizzBuzzTest.Handlers
             _handler.Handle(input);
 
             AssertLinesEqual(new[] { "FizzBuzz", "FizzBuzz", "FizzBuzz" });
+        }
+
+
+        [Fact]
+        public void Handle_PrintsOneLinePerInputInOrder()
+        {
+            var input = ArrangeInputRange(1, 16);
+
+            _handler.Handle(input);
+
+            var expected = new[]
+            {
+                "1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz",
+                "11","Fizz","13","14","FizzBuzz","16"
+            };
+            AssertLinesEqual(expected);
         }
     }
 }
