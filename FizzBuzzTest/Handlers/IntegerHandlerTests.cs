@@ -73,7 +73,6 @@ namespace FizzBuzzTest.Handlers
             AssertLinesEqual(new[] { "Fizz", "Fizz", "Fizz" });
         }
 
-
         [Fact]
         public void Handle_PrintsBuzzForMultiplesOf5()
         {
@@ -84,7 +83,6 @@ namespace FizzBuzzTest.Handlers
             AssertLinesEqual(new[] { "Buzz", "Buzz", "Buzz" });
         }
 
-
         [Fact]
         public void Handle_PrintsFizzBuzzForMultiplesOf3And5()
         {
@@ -94,7 +92,6 @@ namespace FizzBuzzTest.Handlers
 
             AssertLinesEqual(new[] { "FizzBuzz", "FizzBuzz", "FizzBuzz" });
         }
-
 
         [Fact]
         public void Handle_PrintsOneLinePerInputInOrder()
@@ -109,6 +106,16 @@ namespace FizzBuzzTest.Handlers
                 "11","Fizz","13","14","FizzBuzz","16"
             };
             AssertLinesEqual(expected);
+        }
+
+        [Fact]
+        public void Handle_PrintsNothingWhenEmpty()
+        {
+            var input = new List<int>();
+
+            _handler.Handle(input);
+
+            AssertLinesEqual(new List<string>());
         }
     }
 }
